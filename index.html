@@ -29,15 +29,6 @@
       }
 
       alert("Notifications enabled! You will get one every minute.");
-
-      // Start a repeating 1-minute notification
-      setInterval(() => {
-        navigator.serviceWorker.ready.then(reg => {
-          reg.showNotification("Hello World", {
-            body: "This is your scheduled test notification."
-          });
-        });
-      }, 60 * 1000);
     };
   </script>
 </body>
