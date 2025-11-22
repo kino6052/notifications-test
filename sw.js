@@ -3,6 +3,7 @@ function scheduleNext() {
     self.registration.showNotification("Hello World", {
       body: "Fired from service worker",
     });
+    alert("Notification fired");
     scheduleNext();
   }, 15 * 1000);
 }
