@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Notification Test</title>
+</head>
+
+<body>
+  <h1>Notification Test</h1>
+  <p>This page will send a "Hello World" notification every minute.</p>
+
+  <button id="start">Enable Notifications</button>
+
+  <script>
+    // Register service worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js")
+        .then(() => console.log("Service worker registered"))
+        .catch(err => console.error("SW error:", err));
+    }
+
+    document.getElementById("start").onclick = async () => {
+      const permission = await Notification.requestPermission();
+
+      if (permission !== "granted") {
+        alert("Notifications not allowed");
+        return;
+      }
+
+      alert("Notifications enabled! You will get one every minute.");
+
+      // Start a repeating 1-minute notification
+      setInterval(() => {
+        navigator.serviceWorker.ready.then(reg => {
+          reg.showNotification("Hello World", {
+            body: "This is your scheduled test notification."
+          });
+        });
+      }, 60 * 1000);
+    };
+  </script>
+</body>
+
+</html>
