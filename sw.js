@@ -4,7 +4,7 @@ function scheduleNext() {
       body: "Fired from service worker",
     });
     scheduleNext();
-  }, 60 * 1000);
+  }, 15 * 1000);
 }
 
 self.addEventListener("activate", () => {
